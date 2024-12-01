@@ -1,7 +1,6 @@
 import flet
 
-from layout.book_text import BookText
-from layout.filter_button import FilterButton
+from layout.book_text_column.book_text import BookText
 
 
 class GetTextButton(flet.Button):
@@ -26,7 +25,7 @@ class GetTextButton(flet.Button):
 
             path = file_picker_on_result_event.path
 
-            with open(path, "w") as file:
+            with open(path, "w", encoding="utf-8") as file:
                 file.write(self.book_text.value)
 
         self.file_picker.on_result = file_picker_on_result
