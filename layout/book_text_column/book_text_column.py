@@ -1,11 +1,13 @@
 import flet
 from reportlab.lib.pdfencrypt import padding
 
+from layout.book_text_column.all_filters_checkbox import AllFiltersCheckbox
 from layout.book_text_column.filename_button import FilenameButton
 from layout.book_text_column.filter_button import FilterButton
 from layout.book_text_column.filters_row import FiltersRow
 from layout.book_text_column.get_text_button import GetTextButton
 from layout.book_text_column.pdf_file_picker import PdfFilePicker
+from layout.book_text_column.size_text_field import SizeTextField
 from layout.loading_container.loading_container import LoadingContainer
 from layout.book_text_column.book_text import BookText
 
@@ -34,27 +36,22 @@ class BookTextColumn(flet.Column):
             book_text=book_text,
             autofocus=True
         )
-        size_textfield = flet.TextField(
-            label="Digite um filtro desejado",
-            autofocus=True,
-            expand=True
+        all_filters_checkbox = AllFiltersCheckbox(
+            text_filters_row=text_filters_row,
+            book_text=book_text
         )
-
-        def on_submit(_):
-            text_filters_row.controls.append(FilterButton(
-                text=size_textfield.value,
-                filters_row=text_filters_row,
-                book_text=book_text,
-                loading_container=loading_container
-            ))
-            size_textfield.value = ''
-            size_textfield.update()
-            text_filters_row.update()
-        size_textfield.on_submit = on_submit
+        size_textfield = SizeTextField(
+            text_filters_row=text_filters_row,
+            book_text=book_text
+        )
 
         super().__init__(
             controls=[
-                flet.Row(controls=[filename_button, size_textfield]),
+                flet.Row(controls=[
+                    filename_button,
+                    size_textfield,
+                    all_filters_checkbox
+                ]),
                 text_filters_row,
                 flet.Column(
                     expand=True,

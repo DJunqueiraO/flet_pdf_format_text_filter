@@ -42,6 +42,9 @@ class FilenameButton(flet.Button):
             if not os.path.exists(path):
                 return
 
+            if '.pdf' not in path:
+                return
+
             self.loading_container.visible = True
             self.loading_container.update()
 
@@ -54,7 +57,7 @@ class FilenameButton(flet.Button):
                     loading_container=self.loading_container,
                     text=filename_on_blur_book_size
                 ),
-                filters
+                sorted(filters)
             ))
             self.filters_row.update()
             self.loading_container.visible = False
