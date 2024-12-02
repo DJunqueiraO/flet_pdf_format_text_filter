@@ -15,6 +15,7 @@ class BookText(flet.TextField):
         self.path = None
         super().__init__(
             multiline=True,
+            expand=True,
             **cfg
         )
 
@@ -27,12 +28,7 @@ class BookText(flet.TextField):
         with pdfplumber.open(path) as filename_on_blur_file:
             self.path = path
             self.book = Book(filename_on_blur_file.pages)
-
-            # fonts = self.book.get_fonts()
-            # sizes = self.book.get_sizes()
-            # filters = fonts.union(sizes)
             filters = self.book.get_filters()
-
             self.value = self.book.get_text(filters)
             self.update()
         return filters

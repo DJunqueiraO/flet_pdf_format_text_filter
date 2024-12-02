@@ -1,7 +1,7 @@
 import flet
 
-from layout.book_text_column.book_text import BookText
-from layout.book_text_column.filters_row import FiltersRow
+from layout.pdf_filter_column.book_text_column.book_text import BookText
+from layout.pdf_filter_column.filters_row.filters_row import FiltersRow
 
 from layout.loading_container.loading_container import LoadingContainer
 

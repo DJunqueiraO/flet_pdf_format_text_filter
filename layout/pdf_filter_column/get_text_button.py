@@ -1,6 +1,6 @@
 import flet
 
-from layout.book_text_column.book_text import BookText
+from layout.pdf_filter_column.book_text_column.book_text import BookText
 
 
 class GetTextButton(flet.Button):
@@ -15,6 +15,7 @@ class GetTextButton(flet.Button):
 
         super().__init__(
             **cfg,
+            text="Gerar arquivo de texto",
             on_click=self.save_txt
         )
 
