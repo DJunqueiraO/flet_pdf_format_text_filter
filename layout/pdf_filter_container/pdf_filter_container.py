@@ -7,7 +7,7 @@ from layout.pdf_filter_column.get_text_button.get_text_button import GetTextButt
 from layout.pdf_filter_column.inputs_row.inputs_row import InputsRow
 
 
-class PdfFilterColumn(flet.Column):
+class PdfFilterColumn(flet.Container):
     def __init__(
             self,
             page: flet.Page,
@@ -31,13 +31,15 @@ class PdfFilterColumn(flet.Column):
         )
 
         super().__init__(
-            controls=[
-                inputs_row,
-                text_filters_row,
-                book_text_column,
-                get_text_button,
-                pdf_file_picker
-            ],
-            expand=True,
+            content=flet.Column(
+                controls=[
+                    inputs_row,
+                    text_filters_row,
+                    book_text_column,
+                    get_text_button,
+                    pdf_file_picker
+                ],
+                expand=True
+            ),
             **cfg
         )
