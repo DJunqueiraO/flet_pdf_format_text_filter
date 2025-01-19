@@ -3,4 +3,5 @@
   <component name="Black">
     <option name="sdkName" value="Python 3.12 (pythonToPdf)" />
   </component>
+  <component name="ProjectRootManager" version="2" project-jdk-name="Python 3.12 (flet_pdf_format_text_filter)" project-jdk-type="Python SDK" />
 </project>
