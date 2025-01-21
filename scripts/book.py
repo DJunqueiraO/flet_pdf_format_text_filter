@@ -36,10 +36,13 @@ class Book:
                 extracting_char = ExtractingChar(char)
                 size = extracting_char.get_rounded_size()
 
-                if i < len(chars) - 1:
-                    next_extracting_char = ExtractingChar(chars[i + 1])
-                    if next_extracting_char.get_y1() != extracting_char.get_y1():
-                        extracting_char.add_text("\n")
+                if (
+                    i < len(chars) - 1 and
+                    ExtractingChar(chars[i + 1]).get_y1() != extracting_char.get_y1()
+                ):
+                    if extracting_char.get_text() == "-":
+                        continue
+                    extracting_char.add_text("\n")
 
                 y0 = extracting_char.get_y0()
                 if (
