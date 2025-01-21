@@ -31,9 +31,15 @@ class Book:
             self.min_y1 = min_y1
         text = ''
         for extracting_page in self.pages:
-            for char in extracting_page.chars:
+            chars = extracting_page.chars
+            for i, char in enumerate(chars):
                 extracting_char = ExtractingChar(char)
                 size = extracting_char.get_rounded_size()
+
+                if i < len(chars) - 1:
+                    next_extracting_char = ExtractingChar(chars[i + 1])
+                    if next_extracting_char.get_y1() != extracting_char.get_y1():
+                        extracting_char.add_text("\n")
 
                 y0 = extracting_char.get_y0()
                 if (
@@ -54,6 +60,7 @@ class Book:
                         size in filters
                 ):
                     continue
+
                 text += extracting_char.get_text()
         return text
 

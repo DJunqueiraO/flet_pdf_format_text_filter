@@ -14,8 +14,15 @@ class ExtractingChar(dict):
     def get_text(self):
         return self["text"]
 
+    def add_text(self, text: str):
+        self["text"] += text
+        return self
+
     def get_y0(self):
         return self["y0"]
 
     def get_y1(self):
         return self["y1"]
+
+    def get_x0(self):
+        return self["x0"]
