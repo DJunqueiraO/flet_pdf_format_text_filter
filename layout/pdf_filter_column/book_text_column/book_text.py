@@ -22,6 +22,9 @@ class BookText(flet.TextField):
     def get(self) -> Book:
         return self.book
 
+    def get_value(self):
+        return self.value
+
     def load_pdf(self, path):
         if not os.path.exists(path):
             return
@@ -29,6 +32,8 @@ class BookText(flet.TextField):
             self.path = path
             self.book = Book(filename_on_blur_file.pages)
             filters = self.book.get_filters()
+
             self.value = self.book.get_text(filters)
+
             self.update()
         return filters

@@ -27,7 +27,7 @@ class GetTextButton(flet.Button):
             path = file_picker_on_result_event.path
 
             with open(path, "w", encoding="utf-8") as file:
-                file.write(self.book_text.value)
+                file.write(self.book_text.get_value())
 
         self.file_picker.on_result = file_picker_on_result
         self.file_picker.save_file()

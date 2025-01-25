@@ -1,3 +1,6 @@
+import json
+import os.path
+
 from pdfplumber.page import Page
 
 from scripts.extracting_char import ExtractingChar
@@ -5,6 +8,8 @@ from scripts.extracting_char import ExtractingChar
 
 class Book:
     def __init__(self, pages: list[Page]):
+        self.replacers = None
+        self.replacers_path ='input/replacers.json'
         self.pages = pages
         self.min_y0 = None
         self.min_y1 = None
@@ -18,6 +23,12 @@ class Book:
                     extracting_char = ExtractingChar(char)
                     self.filters.add(extracting_char.get_rounded_size())
         return self.filters
+
+    def get_replacers(self):
+        if self.replacers is None and os.path.exists(self.replacers_path):
+            with open(self.replacers_path, "r", encoding="utf-8") as file:
+                self.replacers = json.loads(file.read())
+        return self.replacers
 
     def get_text(
             self,
@@ -42,7 +53,7 @@ class Book:
                 ):
                     if extracting_char.get_text() == "-":
                         continue
-                    extracting_char.add_text(" \n")
+                    extracting_char.add_text(" \n ")
 
                 y0 = extracting_char.get_y0()
                 if (
@@ -65,5 +76,9 @@ class Book:
                     continue
 
                 text += extracting_char.get_text()
+
+        for replacer in self.get_replacers():
+            text = text.replace(replacer["__old"], replacer["__new"])
+
         return text
 
