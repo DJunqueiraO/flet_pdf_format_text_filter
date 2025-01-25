@@ -53,7 +53,7 @@ class Book:
                 ):
                     if extracting_char.get_text() == "-":
                         continue
-                    extracting_char.add_text(" \n ")
+                    extracting_char.add_text(" ")
 
                 y0 = extracting_char.get_y0()
                 if (
