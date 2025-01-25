@@ -11,6 +11,7 @@ class BookText(flet.TextField):
             self,
             **cfg
     ):
+        self.single_line_value = None
         self.book = None
         self.path = None
         super().__init__(
